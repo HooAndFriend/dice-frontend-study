@@ -23,7 +23,7 @@ root.render(
     <ThemeProvider theme={theme}>
       <GlobalStyles styles={{ backgroundColor: 'blue' }} />
       <CssBaseline />
-      <UseLayout children={<App />} />
+      <App />
     </ThemeProvider>
   </Provider>,
 )
