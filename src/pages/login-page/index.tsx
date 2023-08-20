@@ -5,11 +5,14 @@ import useInput from '@/hooks/useInput'
 import LoginPageView from './login-page'
 import type { UserLoginParams } from '@/types/user'
 import { useLoginMutation } from '@/services'
+import { useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
+  const navigate = useNavigate()
+
   const [user, setUser] = useInput<UserLoginParams>({
-    username: '',
-    password: '',
+    username: 'admin@test.com',
+    password: '1234',
   })
 
   const [loginApi] = useLoginMutation()
@@ -30,7 +33,9 @@ const LoginPage = () => {
     loginApi(user)
       .unwrap()
       .then((res) => {
-        console.log(res)
+        if (res.status === 201) {
+          navigate('/todo')
+        }
       })
       .catch((err) => alert(err.data.message))
   }
