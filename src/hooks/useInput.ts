@@ -1,11 +1,10 @@
-// ** React Imports
-import { useState, useCallback } from 'react'
+import { useState, useCallback, ChangeEvent } from 'react'
 
-function useInput(initalValue: any) {
-  const [data, setData] = useState(initalValue)
+function useInput<T extends Record<string, any>>(initialValue: T) {
+  const [data, setData] = useState<T>(initialValue)
 
   const handler = useCallback(
-    (e: any) => {
+    (e: ChangeEvent<HTMLInputElement>) => {
       const { value, name } = e.target
       setData({
         ...data,
@@ -15,7 +14,7 @@ function useInput(initalValue: any) {
     [data],
   )
 
-  return [data, handler, setData]
+  return [data, handler, setData] as const
 }
 
 export default useInput
