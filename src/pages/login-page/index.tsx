@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 const LoginPage = () => {
   const navigate = useNavigate()
 
-  const [user, setUser] = useInput<UserLoginParams>({
+  const { data: user, handler: setUser } = useInput<UserLoginParams>({
     username: 'admin@test.com',
     password: '1234',
   })
@@ -33,7 +33,7 @@ const LoginPage = () => {
     loginApi(user)
       .unwrap()
       .then((res) => {
-        if (res.status === 201) {
+        if (res.status === 200) {
           navigate('/todo')
         }
       })
