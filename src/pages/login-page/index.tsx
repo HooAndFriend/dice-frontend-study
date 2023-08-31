@@ -10,15 +10,15 @@ import { useNavigate } from 'react-router-dom'
 const LoginPage = () => {
   const navigate = useNavigate()
 
-  const [user, setUser] = useInput<UserLoginParams>({
-    username: 'admin@test.com',
-    password: '1234',
+  const {data :user, handler: setUser} = useInput<UserLoginParams>({
+    id: '',
+    password: '',
   })
 
   const [loginApi] = useLoginMutation()
 
   const handleLogin = () => {
-    if (user.username === '') {
+    if (user.id === '') {
       alert('유저 이름을 입력하세요')
 
       return
@@ -33,15 +33,18 @@ const LoginPage = () => {
     loginApi(user)
       .unwrap()
       .then((res) => {
-        if (res.status === 201) {
+        if (res.status === 200) {
           navigate('/todo')
         }
       })
       .catch((err) => alert(err.data.message))
   }
+  const handleNavigateToRegister = () => {
+    navigate('/register'); 
+  };
 
   return (
-    <LoginPageView user={user} setUser={setUser} handleLogin={handleLogin} />
+    <LoginPageView user={user} setUser={setUser} handleLogin={handleLogin} handleNavigateToRegister={handleNavigateToRegister} />
   )
 }
 
