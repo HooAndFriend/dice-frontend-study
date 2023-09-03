@@ -1,8 +1,10 @@
 // ** Router Imports
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import LoginPage from './pages/login-page'
 import { ProtectRoute, PublicRoute } from './utils/protect-route'
 import TodoPage from './pages/todo-page'
+import LoginPage from './pages/login-page'
+import RegisterPage from './pages/register-page'
+import NumberPage from './pages/phonebook-page'
 
 const App = () => {
   return (
@@ -10,9 +12,10 @@ const App = () => {
       <Routes>
         <Route element={<PublicRoute />}>
           <Route path="/" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Route>
         {/* <Route element={<ProtectRoute />}> */}
-        <Route path="/todo" element={<TodoPage />} />
+        <Route path="/phonebook" element={<NumberPage />} />
         {/* </Route> */}
       </Routes>
     </BrowserRouter>
