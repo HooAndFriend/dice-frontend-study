@@ -11,7 +11,7 @@ const SignUpPage = () => {
   const navigate = useNavigate()
 
   const {data :user, handler: setUser} = useInput<UserRegisterParams>({
-    id : '',
+    username : '',
     password: '',
     name: '',
     
@@ -20,7 +20,7 @@ const SignUpPage = () => {
   const [regiApi] = useRegisterMutation()
 
   const handleRegister = () => {
-    if (user.id === '') {
+    if (user.username === '') {
       alert('유저 아이디를 입력하세요')
 
       return

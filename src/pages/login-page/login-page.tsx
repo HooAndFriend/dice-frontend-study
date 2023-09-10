@@ -36,9 +36,9 @@ const LoginPageView = ({ user, setUser, handleLogin,handleNavigateToRegister  }:
           </Grid>
           <Grid item xs={12}>
             <TextField
-              value={user.id}
+              value={user.username}
               onChange={setUser}
-              name="id"
+              name="username"
               fullWidth
             />
           </Grid>

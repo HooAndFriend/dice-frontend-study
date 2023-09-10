@@ -7,18 +7,20 @@ import type { UserLoginParams } from '@/types/user'
 import { useLoginMutation } from '@/services'
 import { useNavigate } from 'react-router-dom'
 
+
+
 const LoginPage = () => {
   const navigate = useNavigate()
 
   const {data :user, handler: setUser} = useInput<UserLoginParams>({
-    id: '',
+    username: '',
     password: '',
   })
 
   const [loginApi] = useLoginMutation()
 
   const handleLogin = () => {
-    if (user.id === '') {
+    if (user.username === '') {
       alert('유저 이름을 입력하세요')
 
       return
@@ -27,17 +29,19 @@ const LoginPage = () => {
     if (user.password === '') {
       alert('패스워드를 입력하세요')
 
-      return
+      return 
     }
 
     loginApi(user)
       .unwrap()
       .then((res) => {
         if (res.status === 200) {
-          navigate('/todo')
+          const accessToken=res.responseData.accessToken
+          localStorage.setItem('accessToken', accessToken);
+          navigate('/phone')
         }
       })
-      .catch((err) => alert(err.data.message))
+      .catch((err) => alert(err))
   }
   const handleNavigateToRegister = () => {
     navigate('/register'); 

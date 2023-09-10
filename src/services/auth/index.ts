@@ -3,6 +3,8 @@ import type { UserRegisterResponse } from '@/types/api/regi'
 import { api } from '..'
 import type { UserLoginParams } from '@/types/user'
 import type { UserRegisterParams } from '@/types/regi'
+import type { UserPhoneParams } from '@/types/phone'
+import type { PhoneResponse } from '@/types/api/phone'
 // Auth Api CreateApi
 export const authApi = api
   .enhanceEndpoints({
@@ -15,9 +17,9 @@ export const authApi = api
       // Mutation
       login: builder.mutation<UserLoginResponse, UserLoginParams>({
         query: (args) => ({
-          url: '/uesr/login',
+          url: '/user/login',
           method: 'POST',
-          body: args,
+          body: args, 
         }),
       }),
     }),
@@ -39,5 +41,26 @@ export const authApi = api
       }),
     }),
   })
+  export const phoneApi = api
+  .enhanceEndpoints({
+    addTagTypes: ['phone'],
+  })
+  .injectEndpoints({
+    overrideExisting: false,
+    endpoints: (builder) => ({
+      phone: builder.mutation<PhoneResponse, UserPhoneParams>({
+        query: (args) => ({
+          url: '/phone',
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+          },
+          body: args,
+        }),
+      }),
+    }),
+  })
+  
+export const {usePhoneMutation} = phoneApi
 export const {useRegisterMutation}= regiApi
 export const { useLoginMutation } = authApi

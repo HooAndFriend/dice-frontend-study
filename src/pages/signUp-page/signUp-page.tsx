@@ -35,10 +35,10 @@ const RegisterPageView = ({ user, setUser, handleRegister }: PropsType) => {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              value={user.id}
+              value={user.username}
               onChange={setUser}
-              placeholder='ID'
-              name="id"
+              placeholder='username'
+              name="username"
               fullWidth
             />
           </Grid>
