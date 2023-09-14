@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const RegisterPageView = ({ user, setUser, handleRegister }: PropsType) => {
   const classes = useStyles();
+  
   return (
     <Grid container spacing={3} sx={{ mt: 5 }}>
       <Grid item xs={4.5} />

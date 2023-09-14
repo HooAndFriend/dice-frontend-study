@@ -5,6 +5,7 @@ import type { UserLoginParams } from '@/types/user'
 import type { UserRegisterParams } from '@/types/regi'
 import type { UserPhoneParams } from '@/types/phone'
 import type { PhoneResponse } from '@/types/api/phone'
+import { SetStateAction } from 'react'
 // Auth Api CreateApi
 export const authApi = api
   .enhanceEndpoints({
@@ -60,7 +61,29 @@ export const authApi = api
       }),
     }),
   })
+
+  export const phoneListApi = api
+  .enhanceEndpoints({
+    addTagTypes: ['phoneList'],
+  })
+  .injectEndpoints({
+    overrideExisting: false,
+    endpoints: (builder) => ({
+      phoneList: builder.mutation<{
+        responseData: SetStateAction<PhoneResponse[]> ;status: number; data: PhoneResponse[] 
+}, UserPhoneParams>({
+        query: (args) => ({
+          url: '/phone',
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+          },
+        }),
+      }),
+    }),
+  })
   
 export const {usePhoneMutation} = phoneApi
+export const {usePhoneListMutation} = phoneListApi
 export const {useRegisterMutation}= regiApi
 export const { useLoginMutation } = authApi

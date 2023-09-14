@@ -1,13 +1,16 @@
 
 import type { UserPhoneParams } from '@/types/phone'
 import { Button, Grid, TextField, Typography } from '@mui/material'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { makeStyles } from '@material-ui/core';
+import { PhoneResponse } from '@/types/api/phone';
 
 interface PropsType {
   phone: UserPhoneParams
   setPhone: (e: ChangeEvent<HTMLInputElement>) => void
   handlePhoneSave: () => void
+  phoneList: PhoneResponse[];
+  fetchPhoneListFromServer:()=>void
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -23,8 +26,27 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const PhonePageView = ({ phone, setPhone, handlePhoneSave}: PropsType) => {
+const PhoneBookComponent = ({ phoneList }) => {
+  return (
+    <div>
+      <ul>
+        {phoneList.map((phoneItem, index) => (
+          <li key={index}>
+            이름: {phoneItem.name}, 전화번호: {phoneItem.number}
+          </li>
+        ))}
+      </ul>
+    </div>  
+  );
+};
+
+const PhonePageView = ({ phone, setPhone, handlePhoneSave, phoneList}: PropsType) => {
     const classes = useStyles();
+    const [isPhoneBookVisible, setIsPhoneBookVisible] = useState(false);
+
+  const togglePhoneBookVisibility = () => {
+    setIsPhoneBookVisible(!isPhoneBookVisible);
+  };
     return (
       <Grid container spacing={3} sx={{ mt: 5 }}>
         <Grid item xs={4.5} />
@@ -58,8 +80,16 @@ const PhonePageView = ({ phone, setPhone, handlePhoneSave}: PropsType) => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={4.5} />
+        <Grid item xs={6}>
+              <Typography variant="h4" onClick={togglePhoneBookVisibility} >
+                전화번호
+              </Typography>
+              {isPhoneBookVisible && (
+        <PhoneBookComponent phoneList={phoneList} />
+      )}
+            </Grid>
       </Grid>
+              
     )
 }
 
