@@ -76,8 +76,8 @@ const PhonePageView = ({
         {isPhoneBookVisible && (
           <div>
             <ul>
-              {phoneList.map((phoneItem, index) => (
-                <li key={index}>
+              {phoneList.map((phoneItem, id) => (
+                <li key={id}>
                   이름: {phoneItem.name}, 전화번호: {phoneItem.number}
                 </li>
               ))}

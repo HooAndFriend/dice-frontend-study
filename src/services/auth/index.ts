@@ -1,13 +1,35 @@
-import type { UserLoginResponse } from '@/types/api/user'
-import type { UserRegisterResponse } from '@/types/api/regi'
 import { api } from '..'
-import type { UserLoginParams } from '@/types/user'
-import type { UserRegisterParams } from '@/types/regi'
-import type { UserPhoneParams } from '@/types/phone'
-import type { PhoneResponse } from '@/types/api/phone'
-import { SetStateAction } from 'react'
+
 // Auth Api CreateApi
+
 export const authApi = api
+  .enhanceEndpoints({
+    addTagTypes: ['Auth']
+  })
+  .injectEndpoints({
+    overrideExisting: false,
+    endpoints: builder => ({
+      login: builder.mutation({
+        query: args => ({
+          url: '/user/login',
+          method: 'POST',
+          body: args
+        })
+      }),
+      saveAdmin: builder.mutation({
+        query: args => ({
+          url: '/user',
+          method: 'POST',
+          body: args
+        })
+      })
+    })
+  })
+
+export const { useLoginMutation, useSaveAdminMutation } = authApi
+
+/**
+ * export const authApi = api
   .enhanceEndpoints({
     addTagTypes: ['Auth'],
   })
@@ -20,13 +42,13 @@ export const authApi = api
         query: (args) => ({
           url: '/user/login',
           method: 'POST',
-          body: args, 
+          body: args,
         }),
       }),
     }),
   })
 
-  export const regiApi = api
+export const regiApi = api
   .enhanceEndpoints({
     addTagTypes: ['regi'],
   })
@@ -42,7 +64,7 @@ export const authApi = api
       }),
     }),
   })
-  export const phoneApi = api
+export const phoneApi = api
   .enhanceEndpoints({
     addTagTypes: ['phone'],
   })
@@ -62,7 +84,7 @@ export const authApi = api
     }),
   })
 
-  export const phoneListApi = api
+export const phoneListApi = api
   .enhanceEndpoints({
     addTagTypes: ['phoneList'],
   })
@@ -70,8 +92,8 @@ export const authApi = api
     overrideExisting: false,
     endpoints: (builder) => ({
       phoneList: builder.mutation<{
-        responseData: SetStateAction<PhoneResponse[]> ;status: number; data: PhoneResponse[] 
-}, UserPhoneParams>({
+        responseData: SetStateAction<PhoneResponse[]>; status: number; data: PhoneResponse[]
+      }, UserPhoneParams>({
         query: (args) => ({
           url: '/phone',
           method: 'GET',
@@ -82,8 +104,16 @@ export const authApi = api
       }),
     }),
   })
-  
-export const {usePhoneMutation} = phoneApi
-export const {usePhoneListMutation} = phoneListApi
-export const {useRegisterMutation}= regiApi
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *
+ *  export const { usePhoneMutation } = phoneApi
+export const { usePhoneListMutation } = phoneListApi
+export const { useRegisterMutation } = regiApi
 export const { useLoginMutation } = authApi
+ */
+

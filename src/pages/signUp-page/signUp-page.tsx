@@ -2,9 +2,9 @@ import { Button, Grid, TextField, Typography } from '@mui/material'
 import { ChangeEvent } from 'react'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { makeStyles } from '@material-ui/core'
-import { UserRegisterParams } from '@/types/regi'
+import { UserLoginParams } from '@/types/user'
 interface PropsType {
-  user: UserRegisterParams
+  user: UserLoginParams
   setUser: (e: ChangeEvent<HTMLInputElement>) => void
   handleRegister: () => void
 }

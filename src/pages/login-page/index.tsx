@@ -10,6 +10,7 @@ const LoginPage = () => {
   const { data: user, handler: setUser } = useInput<UserLoginParams>({
     username: '',
     password: '',
+    name: '',
   })
 
   const [loginApi] = useLoginMutation()
@@ -31,13 +32,12 @@ const LoginPage = () => {
       .unwrap()
       .then((res) => {
         if (res.status === 200) {
-          localStorage.setItem('accessToken', res.responseData.accessToken);
+          localStorage.setItem('accessToken', res.responseData.accessToken)
           navigate('/phone')
         }
       })
       .catch((err) => alert(err.data.message))
   }
-
 
   return (
     <LoginPageView user={user} setUser={setUser} handleLogin={handleLogin} />

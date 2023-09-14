@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import PhonePageView from './phone-page'
 import type { UserPhoneParams } from '@/types/phone'
-import { usePhoneMutation } from '@/services/auth'
+import { usePhoneListMutation } from '@/services/phone/'
 import useInput from '@/hooks/useInput'
-import { usePhoneListMutation } from '@/services/auth'
+import { usePhoneaddMutation } from '@/services/phone'
 import { PhoneResponse } from '@/types/api/phone'
 
 const PhonePage = () => {
@@ -11,7 +11,7 @@ const PhonePage = () => {
     name: '',
     number: '',
   })
-  const [phoneApi] = usePhoneMutation()
+  const [phoneApi] = usePhoneaddMutation()
   const [phoneListApi] = usePhoneListMutation()
   const [phoneList, setPhoneList] = useState<PhoneResponse[]>([])
 

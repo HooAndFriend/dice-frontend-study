@@ -4,20 +4,20 @@
 import useInput from '@/hooks/useInput'
 import SignUp from './signUp-page'
 
-import type { UserRegisterParams } from '@/types/regi'
+import type { UserLoginParams } from '@/types/user'
 import { useNavigate } from 'react-router-dom'
-import { useRegisterMutation } from '@/services'
+import { useSaveAdminMutation } from '@/services'
 
 const SignUpPage = () => {
   const navigate = useNavigate()
 
-  const { data: user, handler: setUser } = useInput<UserRegisterParams>({
+  const { data: user, handler: setUser } = useInput<UserLoginParams>({
     username: '',
     password: '',
     name: '',
   })
 
-  const [regiApi] = useRegisterMutation()
+  const [registerApi] = useSaveAdminMutation()
 
   const handleRegister = () => {
     if (user.username === '') {
@@ -34,7 +34,7 @@ const SignUpPage = () => {
       return
     }
 
-    regiApi(user)
+    registerApi(user)
       .unwrap()
       .then((res) => {
         if (res.status === 200) {

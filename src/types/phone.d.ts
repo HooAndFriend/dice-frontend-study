@@ -1,5 +1,4 @@
 export interface UserPhoneParams {
-    name: string
-    number: string
-  }
-  
+  name: string
+  number: string
+}

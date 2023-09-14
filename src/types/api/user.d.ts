@@ -7,5 +7,6 @@ export interface UserLoginResponse extends Response {
     accessToken: string
     password: string
     refreshToken: string
+    name: string
   }
 }
