@@ -1,5 +1,5 @@
 export interface UserRegisterParams {
-  id: string
+  username: string
   password: string
   name: string
 }

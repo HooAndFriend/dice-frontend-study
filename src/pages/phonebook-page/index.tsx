@@ -11,6 +11,8 @@ const NumberPage = () => {
 
   const [numberApi] = useNumberMutation()
 
+  console.log(localStorage.getItem('accessToken'))
+
   const handleNumber = () => {
     if (number.name === '') {
       alert('이름을 입력하세요')

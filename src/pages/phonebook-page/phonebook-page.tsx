@@ -49,6 +49,9 @@ const PhoneBookPageView = ({ number, setNumber, handleNumber }: PropsType) => {
         </Grid>
       </Grid>
       <Grid item xs={4.5} />
+      <Grid>
+        <Typography>{}</Typography>
+      </Grid>
     </Grid>
   )
 }

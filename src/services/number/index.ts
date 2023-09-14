@@ -17,6 +17,28 @@ export const numberApi = api
         query: (args) => ({
           url: '/phone',
           method: 'POST',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+          body: args,
+        }),
+      }),
+    }),
+  })
+
+export const getNumberApi = api
+  .enhanceEndpoints({
+    addTagTypes: ['getNumber'],
+  })
+  .injectEndpoints({
+    overrideExisting: false,
+    endpoints: (builder) => ({
+      // Query
+      // Mutation
+      number: builder.mutation<NumberResponse, PhoneNumberParams>({
+        query: (args) => ({
+          url: '/phone',
+          method: 'GET',
           body: args,
         }),
       }),

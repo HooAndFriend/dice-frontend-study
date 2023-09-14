@@ -20,7 +20,12 @@ const LoginPageView = ({ user, setUser, handleLogin }: PropsType) => {
             <Typography variant="h3">Login Page</Typography>
           </Grid>
           <Grid item xs={12}>
-            <TextField value={user.id} onChange={setUser} name="id" fullWidth />
+            <TextField
+              value={user.username}
+              onChange={setUser}
+              name="username"
+              fullWidth
+            />
           </Grid>
           <Grid item xs={12}>
             <TextField
