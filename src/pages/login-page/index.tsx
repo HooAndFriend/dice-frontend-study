@@ -1,18 +1,13 @@
-/* eslint-disable */
-
-// ** Components Imports
 import useInput from '@/hooks/useInput'
 import LoginPageView from './login-page'
 import type { UserLoginParams } from '@/types/user'
 import { useLoginMutation } from '@/services'
 import { useNavigate } from 'react-router-dom'
 
-
-
 const LoginPage = () => {
   const navigate = useNavigate()
 
-  const {data :user, handler: setUser} = useInput<UserLoginParams>({
+  const { data: user, handler: setUser } = useInput<UserLoginParams>({
     username: '',
     password: '',
   })
@@ -29,26 +24,23 @@ const LoginPage = () => {
     if (user.password === '') {
       alert('패스워드를 입력하세요')
 
-      return 
+      return
     }
 
     loginApi(user)
       .unwrap()
       .then((res) => {
         if (res.status === 200) {
-          const accessToken=res.responseData.accessToken
-          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('accessToken', res.responseData.accessToken);
           navigate('/phone')
         }
       })
-      .catch((err) => alert(err))
+      .catch((err) => alert(err.data.message))
   }
-  const handleNavigateToRegister = () => {
-    navigate('/register'); 
-  };
+
 
   return (
-    <LoginPageView user={user} setUser={setUser} handleLogin={handleLogin} handleNavigateToRegister={handleNavigateToRegister} />
+    <LoginPageView user={user} setUser={setUser} handleLogin={handleLogin} />
   )
 }
 

@@ -7,14 +7,14 @@ import SignUp from './signUp-page'
 import type { UserRegisterParams } from '@/types/regi'
 import { useNavigate } from 'react-router-dom'
 import { useRegisterMutation } from '@/services'
+
 const SignUpPage = () => {
   const navigate = useNavigate()
 
-  const {data :user, handler: setUser} = useInput<UserRegisterParams>({
-    username : '',
+  const { data: user, handler: setUser } = useInput<UserRegisterParams>({
+    username: '',
     password: '',
     name: '',
-    
   })
 
   const [regiApi] = useRegisterMutation()
@@ -22,22 +22,19 @@ const SignUpPage = () => {
   const handleRegister = () => {
     if (user.username === '') {
       alert('유저 아이디를 입력하세요')
-
       return
     }
 
     if (user.password === '') {
       alert('패스워드를 입력하세요')
-
       return
     }
     if (user.name === '') {
-        alert('이름을 입력하세요')
-  
-        return
-      }
+      alert('이름을 입력하세요')
+      return
+    }
 
-      regiApi(user)
+    regiApi(user)
       .unwrap()
       .then((res) => {
         if (res.status === 200) {
