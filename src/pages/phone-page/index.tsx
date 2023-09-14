@@ -34,8 +34,7 @@ const PhonePage = () => {
           fetchPhoneListFromServer()
         }
       })
-      .catch((err) => console.log(err)),
-      [fetchPhoneListFromServer()]
+      .catch((err) => console.log(err))
   }
 
   const fetchPhoneListFromServer = () => {
