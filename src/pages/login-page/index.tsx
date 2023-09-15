@@ -11,8 +11,8 @@ const LoginPage = () => {
   const navigate = useNavigate()
 
   const [user, setUser] = useInput<UserLoginParams>({
-    username: 'admin@test.com',
-    password: '1234',
+    username: '',
+    password: '',
   })
 
   const [loginApi] = useLoginMutation()
@@ -33,11 +33,14 @@ const LoginPage = () => {
     loginApi(user)
       .unwrap()
       .then((res) => {
-        if (res.status === 201) {
-          navigate('/todo')
+        console.log(res)
+        if (res.status === 200) {
+          localStorage.setItem('accessToken', res.responseData.accessToken)
+          localStorage.setItem('name', res.responseData.name)
+          window.location.replace('http://localhost:3000/phonebook')
         }
       })
-      .catch((err) => alert(err.data.message))
+      .catch((err) => alert(err))
   }
 
   return (

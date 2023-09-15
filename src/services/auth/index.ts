@@ -14,7 +14,7 @@ export const authApi = api
       // Mutation
       login: builder.mutation<UserLoginResponse, UserLoginParams>({
         query: (args) => ({
-          url: '/auth/login',
+          url: '/user/login',
           method: 'POST',
           body: args,
         }),

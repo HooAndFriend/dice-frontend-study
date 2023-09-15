@@ -1,10 +1,9 @@
 import type { Response } from '.'
 
 export interface UserLoginResponse extends Response {
-  data: {
-    id: number
+  responseData: {
     accessToken: string
-    email: string
+    name: string
     refreshToken: string
   }
 }
