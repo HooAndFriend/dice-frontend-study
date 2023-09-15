@@ -11,14 +11,14 @@ const LoginPage = () => {
   const navigate = useNavigate()
 
   const [user, setUser] = useInput<UserLoginParams>({
-    id: '',
+    username: '',
     password: '',
   })
 
   const [loginApi] = useLoginMutation()
 
   const handleLogin = () => {
-    if (user.id === '') {
+    if (user.username === '') {
       alert('유저 이름을 입력하세요')
 
       return
@@ -35,10 +35,12 @@ const LoginPage = () => {
       .then((res) => {
         console.log(res)
         if (res.status === 200) {
-          navigate('/phonebook')
+          localStorage.setItem('accessToken', res.responseData.accessToken)
+          localStorage.setItem('name', res.responseData.name)
+          window.location.replace('http://localhost:3000/phonebook')
         }
       })
-      .catch((err) => alert(err.data.message))
+      .catch((err) => alert(err))
   }
 
   return (

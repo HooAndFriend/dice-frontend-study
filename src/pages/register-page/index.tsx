@@ -8,15 +8,17 @@ import { useRegisterMutation } from '@/services/register'
 
 const RegisterPage = () => {
   const [user, setUser] = useInput<UserRegisterParams>({
-    id: '',
+    username: '',
     password: '',
     name: '',
   })
 
+  console.log(localStorage)
+
   const [registerApi] = useRegisterMutation()
 
   const handleRegister = () => {
-    if (user.id === '') {
+    if (user.username === '') {
       alert('아이디를 입력하세요')
 
       return
