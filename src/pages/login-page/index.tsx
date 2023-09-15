@@ -19,7 +19,7 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     if (user.username === '') {
-      alert('아이디를 입력하세요')
+      alert('유저 이름을 입력하세요')
 
       return
     }
