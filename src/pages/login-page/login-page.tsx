@@ -1,7 +1,6 @@
 import { UserLoginParams } from '@/types/user'
 import { Button, Grid, TextField, Typography } from '@mui/material'
 import { ChangeEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 interface PropsType {
   user: UserLoginParams
@@ -10,7 +9,6 @@ interface PropsType {
 }
 
 const LoginPageView = ({ user, setUser, handleLogin }: PropsType) => {
-  const navigate = useNavigate()
   return (
     <Grid container spacing={3} sx={{ mt: 5 }}>
       <Grid item xs={4.5} />
@@ -41,13 +39,6 @@ const LoginPageView = ({ user, setUser, handleLogin }: PropsType) => {
               LOGIN
             </Button>
           </Grid>
-          <Typography
-            onClick={() => {
-              navigate('/register')
-            }}
-          >
-            Register
-          </Typography>
         </Grid>
       </Grid>
       <Grid item xs={4.5} />
