@@ -1,7 +1,9 @@
 import useInput from '@/hooks/useInput'
 import PhoneBookPageView from './phonebook-page'
 import { PhoneNumberParams } from '@/types/number'
-import { useNumberMutation } from '@/services/number'
+import { useGetNumberListMutation, useNumberMutation } from '@/services/number'
+import { useState } from 'react'
+import { NumberResponse } from '@/types/api/number'
 
 const NumberPage = () => {
   const [number, setNumber] = useInput<PhoneNumberParams>({
@@ -10,8 +12,19 @@ const NumberPage = () => {
   })
 
   const [numberApi] = useNumberMutation()
+  const [getNumberApi] = useGetNumberListMutation()
+  const [numberList, setNumberList] = useState<NumberResponse[]>([])
 
-  console.log(localStorage.getItem('accessToken'))
+  //console.log(localStorage.getItem('accessToken'))
+  const getData = () => {
+    getNumberApi(number)
+      .unwrap()
+      .then((res) => {
+        console.log(res.responseData)
+        setNumberList(res.responseData)
+      })
+      .catch((err) => console.log(err))
+  }
 
   const handleNumber = () => {
     if (number.name === '') {
@@ -30,8 +43,8 @@ const NumberPage = () => {
       .then((res) => {
         if (res.status === 200) {
           console.log('저장되었습니다')
+          getData()
         }
-
         console.log(res)
       })
   }
@@ -41,6 +54,8 @@ const NumberPage = () => {
       number={number}
       setNumber={setNumber}
       handleNumber={handleNumber}
+      numberList={numberList}
+      getData={getData}
     />
   )
 }
