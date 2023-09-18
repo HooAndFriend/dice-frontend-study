@@ -1,6 +1,6 @@
 import type { PhoneNumberParams } from '@/types/number'
 import { Button, Grid, TextField, Typography } from '@mui/material'
-import { ChangeEvent, useEffect } from 'react'
+import { ChangeEvent } from 'react'
 import type { NumberResponse } from '@/types/api/number'
 
 interface PropsType {
@@ -8,18 +8,13 @@ interface PropsType {
   numberList: NumberResponse[]
   setNumber: (e: ChangeEvent<HTMLInputElement>) => void
   handleNumber: () => void
-  getData: () => void
 }
 const PhoneBookPageView = ({
   number,
+  numberList,
   setNumber,
   handleNumber,
-  numberList,
-  getData,
 }: PropsType) => {
-  useEffect(() => {
-    getData()
-  }, [])
   return (
     <Grid container spacing={3} sx={{ mt: 5 }}>
       <Grid item xs={4.5} />
@@ -64,8 +59,8 @@ const PhoneBookPageView = ({
       <Grid item xs={9}>
         {numberList.length > 0 ? (
           numberList.map((item) => (
-            <li>
-              이름 : {item.name} , 전화번호 : {item.number}
+            <li key={item.id}>
+              이름 : {item.name} , 전화번호 :{item.number}
             </li>
           ))
         ) : (

@@ -25,24 +25,7 @@ export const numberApi = api
           body: args,
         }),
       }),
-    }),
-  })
-
-export const getNumberApi = api
-  .enhanceEndpoints({
-    addTagTypes: ['getNumber'],
-  })
-  .injectEndpoints({
-    overrideExisting: false,
-    endpoints: (builder) => ({
-      getNumberList: builder.mutation<
-        {
-          responseData: SetStateAction<NumberResponse[]>
-          status: number
-          data: NumberResponse[]
-        },
-        PhoneNumberParams
-      >({
+      getNumberList: builder.mutation<NumberResponse[], PhoneNumberParams>({
         query: (args) => ({
           url: '/phone',
           method: 'GET',
@@ -55,4 +38,4 @@ export const getNumberApi = api
   })
 
 export const { useNumberMutation } = numberApi
-export const { useGetNumberListMutation } = getNumberApi
+export const { useGetNumberListMutation } = numberApi
