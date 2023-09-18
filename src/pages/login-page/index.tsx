@@ -5,11 +5,10 @@ import useInput from '@/hooks/useInput'
 import LoginPageView from './login-page'
 import type { UserLoginParams } from '@/types/user'
 import { useLoginMutation } from '@/services'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
   const navigate = useNavigate()
-
   const [user, setUser] = useInput<UserLoginParams>({
     username: '',
     password: '',
@@ -33,14 +32,13 @@ const LoginPage = () => {
     loginApi(user)
       .unwrap()
       .then((res) => {
-        console.log(res)
         if (res.status === 200) {
           localStorage.setItem('accessToken', res.responseData.accessToken)
           localStorage.setItem('name', res.responseData.name)
-          window.location.replace('http://localhost:3000/phonebook')
+          navigate('/phonebook')
         }
       })
-      .catch((err) => alert(err))
+      .catch((err) => alert(err.data.message))
   }
 
   return (

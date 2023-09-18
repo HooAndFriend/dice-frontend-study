@@ -12,9 +12,6 @@ const RegisterPage = () => {
     password: '',
     name: '',
   })
-
-  console.log(localStorage)
-
   const [registerApi] = useRegisterMutation()
 
   const handleRegister = () => {
