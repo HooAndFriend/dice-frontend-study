@@ -4,6 +4,7 @@ import type { PhoneNumberParams } from '@/types/number'
 import { useGetNumberListMutation, useNumberMutation } from '@/services/number'
 import { useEffect, useState } from 'react'
 import type { NumberResponse } from '@/types/api/number'
+import { RootState } from '@/store'
 
 const NumberPage = () => {
   const [number, setNumber] = useInput<PhoneNumberParams>({
@@ -12,7 +13,6 @@ const NumberPage = () => {
   })
   const [saveNumberApi] = useNumberMutation()
   const [getNumberApi] = useGetNumberListMutation()
-
   const [numberList, setNumberList] = useState<NumberResponse[]>([])
 
   useEffect(() => {

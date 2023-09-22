@@ -1,4 +1,6 @@
 /* eslint-disable */
+import { RootState } from '@/store'
+import { getAccessToken } from '@/store/app/auth'
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { Mutex } from 'async-mutex'
 
@@ -6,6 +8,15 @@ const baseUrl = import.meta.env.VITE_SERVER_URL + '/api'
 
 const baseQuery = fetchBaseQuery({
   prepareHeaders: (headers, { getState }: any) => {
+    const {
+      auth: {
+        user: { accessToken: accessToken },
+      },
+    } = getState() as RootState
+
+    if (accessToken) {
+      headers.set('authorization', `Bearer ${accessToken}`)
+    }
     return headers
   },
   baseUrl,

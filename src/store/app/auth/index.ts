@@ -4,12 +4,12 @@ import { RootState } from '@/store'
 import { createSlice } from '@reduxjs/toolkit'
 
 interface UserType {
-  user: { accessToken: string; email: string; refreshToken: string }
+  user: { accessToken: string; name: string; refreshToken: string }
 }
 
 const initialState: UserType = {
   user: {
-    email: '',
+    name: '',
     accessToken: '',
     refreshToken: '',
   },
@@ -23,7 +23,7 @@ export const authSlice = createSlice({
     builder.addMatcher(
       authApi.endpoints.login.matchFulfilled,
       (state, { payload }) => {
-        state.user = { ...payload.data }
+        state.user = { ...payload.responseData }
       },
     )
   },

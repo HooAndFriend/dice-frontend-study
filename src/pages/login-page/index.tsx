@@ -34,7 +34,6 @@ const LoginPage = () => {
       .then((res) => {
         if (res.status === 200) {
           localStorage.setItem('accessToken', res.responseData.accessToken)
-          localStorage.setItem('name', res.responseData.name)
           navigate('/phonebook')
         }
       })
