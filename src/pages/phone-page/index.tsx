@@ -4,7 +4,7 @@ import type { UserPhoneParams } from '@/types/phone'
 import { usePhoneListMutation } from '@/services/phone/'
 import useInput from '@/hooks/useInput'
 import { usePhoneaddMutation } from '@/services/phone'
-import { PhoneResponse } from '@/types/api/phone'
+import type { PhoneResponse } from '@/types/api/phone'
 
 const PhonePage = () => {
   const { data: phone, handler: setPhone } = useInput<UserPhoneParams>({
@@ -31,6 +31,7 @@ const PhonePage = () => {
       .then((res) => {
         if (res.status === 200) {
           alert('전화번호 추가 성공')
+          console.log(res.responseData)
           fetchPhoneListFromServer()
         }
       })
@@ -43,7 +44,6 @@ const PhonePage = () => {
       .then((res) => {
         if (res.status === 200) {
           console.log('전화번호 목록 가져오기 성공')
-          setPhoneList(res.responseData)
         }
       })
       .catch((err) => console.log(err))

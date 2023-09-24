@@ -32,7 +32,6 @@ const LoginPage = () => {
       .unwrap()
       .then((res) => {
         if (res.status === 200) {
-          localStorage.setItem('accessToken', res.responseData.accessToken)
           navigate('/phone')
         }
       })

@@ -58,7 +58,6 @@ const LoginPageView = ({ user, setUser, handleLogin }: PropsType) => {
           <Grid item xs={12}>
             <Link to="/register">
               <Button variant="contained" fullWidth>
-                {' '}
                 회원가입
               </Button>
             </Link>

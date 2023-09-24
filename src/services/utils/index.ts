@@ -5,7 +5,16 @@ import { Mutex } from 'async-mutex'
 const baseUrl = import.meta.env.VITE_SERVER_URL + '/api'
 
 const baseQuery = fetchBaseQuery({
-  prepareHeaders: (headers, { getState }: any) => {
+  prepareHeaders: (headers, { getState }) => {
+    const {
+      auth: {
+        user: { accessToken },
+      },
+    }: any = getState()
+
+    if (accessToken) {
+      headers.set('authorization', `Bearer ${accessToken}`)
+    }
     return headers
   },
   baseUrl,

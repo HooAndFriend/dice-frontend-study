@@ -28,10 +28,10 @@ const PhonePageView = ({
   phone,
   setPhone,
   handlePhoneSave,
-  phoneList,
+  phoneList,    
 }: PropsType) => {
   const classes = useStyles()
-  const [isPhoneBookVisible, setIsPhoneBookVisible] = useState(false)
+  const [isPhoneBookVisible, setIsPhoneBookVisible] = useState<Boolean>(false)
 
   const togglePhoneBookVisibility = () => {
     setIsPhoneBookVisible(!isPhoneBookVisible)
@@ -76,9 +76,10 @@ const PhonePageView = ({
         {isPhoneBookVisible && (
           <div>
             <ul>
-              {phoneList.map((phoneItem, id) => (
-                <li key={id}>
-                  이름: {phoneItem.name}, 전화번호: {phoneItem.number}
+              {phoneList.map((item) => (
+                <li key={item.responseData.id}>
+                  이름: {item.responseData.name}, 전화번호:
+                  {item.responseData.number}
                 </li>
               ))}
             </ul>
