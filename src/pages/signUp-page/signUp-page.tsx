@@ -1,13 +1,12 @@
-import { UserLoginParams } from '@/types/user'
 import { Button, Grid, TextField, Typography } from '@mui/material'
 import { ChangeEvent } from 'react'
-import LoginIcon from '@mui/icons-material/Login'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { makeStyles } from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import { UserLoginParams } from '@/types/user'
 interface PropsType {
   user: UserLoginParams
   setUser: (e: ChangeEvent<HTMLInputElement>) => void
-  handleLogin: () => void
+  handleRegister: () => void
 }
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,8 +19,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
 }))
-const LoginPageView = ({ user, setUser, handleLogin }: PropsType) => {
+const RegisterPageView = ({ user, setUser, handleRegister }: PropsType) => {
   const classes = useStyles()
+
   return (
     <Grid container spacing={3} sx={{ mt: 5 }}>
       <Grid item xs={4.5} />
@@ -29,14 +29,15 @@ const LoginPageView = ({ user, setUser, handleLogin }: PropsType) => {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <div className={classes.loginContainer}>
-              <LoginIcon />
-              <Typography variant="h3">Login</Typography>
+              <LockOutlinedIcon />
+              <Typography variant="h3">Sign Up</Typography>
             </div>
           </Grid>
           <Grid item xs={12}>
             <TextField
               value={user.username}
               onChange={setUser}
+              placeholder="username"
               name="username"
               fullWidth
             />
@@ -46,21 +47,25 @@ const LoginPageView = ({ user, setUser, handleLogin }: PropsType) => {
               value={user.password}
               onChange={setUser}
               name="password"
+              placeholder="password"
               fullWidth
               type="password"
             />
           </Grid>
           <Grid item xs={12}>
-            <Button variant="contained" fullWidth onClick={handleLogin}>
-              LOGIN
-            </Button>
+            <TextField
+              value={user.name}
+              onChange={setUser}
+              name="name"
+              placeholder="NAME"
+              fullWidth
+              type="name"
+            />
           </Grid>
           <Grid item xs={12}>
-            <Link to="/register">
-              <Button variant="contained" fullWidth>
-                회원가입
-              </Button>
-            </Link>
+            <Button variant="contained" fullWidth onClick={handleRegister}>
+              Sign UP
+            </Button>
           </Grid>
         </Grid>
       </Grid>
@@ -69,4 +74,4 @@ const LoginPageView = ({ user, setUser, handleLogin }: PropsType) => {
   )
 }
 
-export default LoginPageView
+export default RegisterPageView

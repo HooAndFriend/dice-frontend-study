@@ -1,10 +1,14 @@
-import useInput from '@/hooks/useInput'
-import LoginPageView from './login-page'
-import type { UserLoginParams } from '@/types/user'
-import { useLoginMutation } from '@/services'
-import { useNavigate } from 'react-router-dom'
+/* eslint-disable */
 
-const LoginPage = () => {
+// ** Components Imports
+import useInput from '@/hooks/useInput'
+import SignUp from './signUp-page'
+
+import type { UserLoginParams } from '@/types/user'
+import { useNavigate } from 'react-router-dom'
+import { useSaveAdminMutation } from '@/services'
+
+const SignUpPage = () => {
   const navigate = useNavigate()
 
   const { data: user, handler: setUser } = useInput<UserLoginParams>({
@@ -13,34 +17,36 @@ const LoginPage = () => {
     name: '',
   })
 
-  const [loginApi] = useLoginMutation()
+  const [registerApi] = useSaveAdminMutation()
 
-  const handleLogin = () => {
+  const handleRegister = () => {
     if (user.username === '') {
-      alert('유저 이름을 입력하세요')
-
+      alert('유저 아이디를 입력하세요')
       return
     }
 
     if (user.password === '') {
       alert('패스워드를 입력하세요')
-
+      return
+    }
+    if (user.name === '') {
+      alert('이름을 입력하세요')
       return
     }
 
-    loginApi(user)
+    registerApi(user)
       .unwrap()
       .then((res) => {
         if (res.status === 200) {
-          navigate('/phone')
+          navigate('/')
         }
       })
       .catch((err) => alert(err.data.message))
   }
 
   return (
-    <LoginPageView user={user} setUser={setUser} handleLogin={handleLogin} />
+    <SignUp user={user} setUser={setUser} handleRegister={handleRegister} />
   )
 }
 
-export default LoginPage
+export default SignUpPage
